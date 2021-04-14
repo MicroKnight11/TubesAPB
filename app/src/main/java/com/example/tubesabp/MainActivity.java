@@ -19,9 +19,12 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
+import android.widget.Button;
 import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.example.tubesabp.ui.login.LoginActivity;
 
 import java.net.URI;
 
@@ -35,7 +38,13 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
         setContentView(R.layout.activity_main);
 
         GridLayout gridLayout = findViewById(R.id.grid_layout);
-
+        View user = findViewById(R.id.userview);
+        user.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                GoToLogin();
+            }
+        });
         //set setiap cardview yang ada saat di click akan buat intent ke activity_lapangan
         for (int i=0; i<gridLayout.getChildCount(); i++){
             CardView card = (CardView) gridLayout.getChildAt(i);
@@ -95,6 +104,12 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
         TextView textView = (TextView) constraint.getChildAt(0);
         String olahraga = textView.getText().toString();
         i.putExtra(EXTRA_MESSAGE, olahraga);
+        startActivity(i);
+    }
+
+    private void GoToLogin(){
+        //explicit intent buat ke halaman login
+        Intent i = new Intent(MainActivity.this, LoginActivity.class);
         startActivity(i);
     }
 
