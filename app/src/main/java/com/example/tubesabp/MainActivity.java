@@ -1,20 +1,29 @@
 package com.example.tubesabp;
 
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.gridlayout.widget.GridLayout;
 
+import android.animation.PropertyValuesHolder;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import java.net.URI;
 
 public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuItemClickListener {
 
@@ -27,6 +36,7 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
 
         GridLayout gridLayout = findViewById(R.id.grid_layout);
 
+        //set setiap cardview yang ada saat di click akan buat intent ke activity_lapangan
         for (int i=0; i<gridLayout.getChildCount(); i++){
             CardView card = (CardView) gridLayout.getChildAt(i);
             card.setOnClickListener(new View.OnClickListener() {
@@ -39,6 +49,7 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
     }
 
     public void showPopUp(View v) {
+        //untuk show pop up menu
         PopupMenu popupMenu = new PopupMenu(this, v);
         popupMenu.setOnMenuItemClickListener(this);
         popupMenu.inflate(R.menu.popup_menu);
@@ -48,20 +59,37 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
     public boolean onMenuItemClick(MenuItem item){
         switch (item.getItemId()){
             case R.id.item1:
-                Toast.makeText(this,"item 1 clicked", Toast.LENGTH_SHORT).show();
+                DialogMasukan masukan = new DialogMasukan(MainActivity.this);
+//                Window window = masukan.getWindow();
+//                window.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+//                window.setGravity(Gravity.CENTER);
+                masukan.show();
+//                Toast.makeText(this,"item 1 clicked", Toast.LENGTH_SHORT).show();
                 return true;
             case R.id.item2:
-                Toast.makeText(this,"item 2 clicked", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this,"Hubungi Kami clicked", Toast.LENGTH_SHORT).show();
                 return true;
             case R.id.item3:
-                Toast.makeText(this,"item 3 clicked", Toast.LENGTH_SHORT).show();
+                GoToPlayStore();
+//                Toast.makeText(this,"Nilai Kami clicked", Toast.LENGTH_SHORT).show();
                 return true;
             default:
                 return false;
         }
     }
 
+    private void GoToPlayStore(){
+        //implicit intent buat ke playstore
+        try {
+            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=com.laparaga.app")));
+        }
+        catch (android.content.ActivityNotFoundException error) {
+            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=com.laparaga.app")));
+        }
+    }
+
     private void GoToActivityLapangan(CardView card){
+        //explicit intent buat ke activity_lapangan`
         Intent i = new Intent(MainActivity.this,MainActivityLapangan.class);
         ConstraintLayout constraint = (ConstraintLayout) card.getChildAt(0);
         TextView textView = (TextView) constraint.getChildAt(0);

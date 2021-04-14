@@ -28,6 +28,7 @@
         app:layout_constraintStart_toStartOf="@+id/guideline4">
 
         <LinearLayout
+            android:id="@+id/linear_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
@@ -46,6 +47,7 @@
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
+
                     <androidx.constraintlayout.widget.Guideline
                         android:id="@+id/guideline3"
                         android:layout_width="wrap_content"
@@ -100,8 +102,8 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="10dp"
                         android:layout_marginLeft="10dp"
-                        android:textStyle="bold"
                         android:text="Metro Sports Center MT. Haryono : Futsal"
+                        android:textStyle="bold"
                         app:layout_constraintEnd_toStartOf="@+id/guideline3"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="@+id/guideline8" />
@@ -135,6 +137,7 @@
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
+
                     <androidx.constraintlayout.widget.Guideline
                         android:id="@+id/guideline9"
                         android:layout_width="wrap_content"
@@ -189,8 +192,8 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="10dp"
                         android:layout_marginLeft="10dp"
-                        android:textStyle="bold"
                         android:text="Metro Sports Center MT. Haryono : Futsal"
+                        android:textStyle="bold"
                         app:layout_constraintEnd_toStartOf="@+id/guideline9"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="@+id/guideline10" />
@@ -224,6 +227,7 @@
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
+
                     <androidx.constraintlayout.widget.Guideline
                         android:id="@+id/guideline3"
                         android:layout_width="wrap_content"
@@ -278,8 +282,8 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="10dp"
                         android:layout_marginLeft="10dp"
-                        android:textStyle="bold"
                         android:text="Metro Sports Center MT. Haryono : Futsal"
+                        android:textStyle="bold"
                         app:layout_constraintEnd_toStartOf="@+id/guideline3"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="@+id/guideline8" />
@@ -313,6 +317,7 @@
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
+
                     <androidx.constraintlayout.widget.Guideline
                         android:id="@+id/guideline3"
                         android:layout_width="wrap_content"
@@ -367,8 +372,8 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="10dp"
                         android:layout_marginLeft="10dp"
-                        android:textStyle="bold"
                         android:text="Metro Sports Center MT. Haryono : Futsal"
+                        android:textStyle="bold"
                         app:layout_constraintEnd_toStartOf="@+id/guideline3"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="@+id/guideline8" />
