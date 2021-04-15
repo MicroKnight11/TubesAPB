@@ -22,6 +22,8 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.tubesabp.DialogLupaPassword;
+import com.example.tubesabp.MainActivity;
 import com.example.tubesabp.R;
 import com.example.tubesabp.ui.login.LoginViewModel;
 import com.example.tubesabp.ui.login.LoginViewModelFactory;
@@ -41,6 +43,15 @@ public class LoginActivity extends AppCompatActivity {
         final EditText passwordEditText = findViewById(R.id.password);
         final Button loginButton = findViewById(R.id.login);
         final ProgressBar loadingProgressBar = findViewById(R.id.loading);
+        TextView lupa = findViewById(R.id.text_lupa);
+
+        lupa.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DialogLupaPassword dialog = new DialogLupaPassword(LoginActivity.this);
+                dialog.show();
+            }
+        });
 
         loginViewModel.getLoginFormState().observe(this, new Observer<LoginFormState>() {
             @Override
