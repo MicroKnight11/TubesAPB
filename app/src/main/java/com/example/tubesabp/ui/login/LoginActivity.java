@@ -48,6 +48,7 @@ public class LoginActivity extends AppCompatActivity {
         lupa.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //memunculkan dialog lupa password saat menekan text_lupa
                 DialogLupaPassword dialog = new DialogLupaPassword(LoginActivity.this);
                 dialog.show();
             }

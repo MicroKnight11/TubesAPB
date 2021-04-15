@@ -85,8 +85,6 @@
         android:hint="@string/prompt_email"
         android:inputType="textEmailAddress"
         android:selectAllOnFocus="true"
-        android:text="Johndoe@mail.com"
-        android:textColor="#918989"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -119,6 +117,7 @@
         android:layout_marginEnd="16dp"
         android:layout_marginRight="16dp"
         android:layout_marginBottom="64dp"
+        android:background="@drawable/border_m"
         android:enabled="false"
         android:text="MASUK"
         android:textColor="#FFFFFF"

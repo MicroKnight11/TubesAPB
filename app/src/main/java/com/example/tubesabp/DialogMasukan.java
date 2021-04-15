@@ -35,12 +35,15 @@ public class DialogMasukan extends Dialog {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.dialog_masukan);
         getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.WRAP_CONTENT);
+
         Button btn_kirim = (Button) findViewById(R.id.btn_kirim);
         EditText input_email = (EditText) findViewById(R.id.input_email);
         EditText input_masukan = (EditText) findViewById(R.id.input_masukan);
+
         btn_kirim.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //menjalankan intent composeEmail saat menekan tombol kirim
                 String[] email = {input_email.getText().toString()};
                 String subject = input_masukan.getText().toString();
                 if (!isEmailValid(email[0])) {
@@ -48,25 +51,27 @@ public class DialogMasukan extends Dialog {
                     return;
                 }
                 else {
-                    if (subject == null) {
+                    if (subject == "") {
                         Toast.makeText(getOwnerActivity(), "Harap isi masukan", Toast.LENGTH_SHORT).show();
                         return;
                     }
                     else{
-                        composeEmail(email,subject);
-                        dismiss();
-                        AlertDialog.Builder builder = new AlertDialog.Builder(getOwnerActivity());
-                        builder.setMessage("Terima kasih sudah memberi masukan :)");
-                        builder.setNeutralButton("OK", null);
-                        AlertDialog sukses = builder.create();
-                        sukses.show();
+                        if (composeEmail(email,subject)){
+                            dismiss();
+                            AlertDialog.Builder builder = new AlertDialog.Builder(getOwnerActivity());
+                            builder.setMessage("Terima kasih sudah memberi masukan :)");
+                            builder.setNeutralButton("OK", null);
+                            AlertDialog sukses = builder.create();
+                            sukses.show();
+                        }
                     }
                 }
             }
         });
     }
 
-    public void composeEmail(String[] addresses, String body) {
+    protected boolean composeEmail(String[] addresses, String body) {
+        //implicit intent untuk mengirim email
         Intent intent = new Intent(Intent.ACTION_SENDTO);
         intent.setData(Uri.parse("mailto:"));
         intent.putExtra(Intent.EXTRA_EMAIL, addresses);
@@ -75,12 +80,16 @@ public class DialogMasukan extends Dialog {
         try {
             getOwnerActivity().startActivity(intent);
             Toast.makeText(getOwnerActivity(), "Terkirim", Toast.LENGTH_SHORT).show();
+            return true;
         }catch (ActivityNotFoundException e){
             Log.getStackTraceString(e);
+            Toast.makeText(getOwnerActivity(), "Error", Toast.LENGTH_SHORT).show();
+            return false;
         }
     }
 
-    private static boolean isEmailValid(String email) {
+    protected boolean isEmailValid(String email) {
+        //check penulisan email
         String expression = "^[\\w\\.-]+@([\\w\\-]+\\.)+[A-Z]{2,4}$";
         Pattern pattern = Pattern.compile(expression, Pattern.CASE_INSENSITIVE);
         Matcher matcher = pattern.matcher(email);

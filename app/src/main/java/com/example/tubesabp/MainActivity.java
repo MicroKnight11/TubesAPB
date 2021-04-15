@@ -36,10 +36,12 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        Log.i(TAG, "onCreate");
 
         GridLayout gridLayout = findViewById(R.id.grid_layout);
         View user = findViewById(R.id.userview);
         user.setOnClickListener(new View.OnClickListener(){
+            //pindah ke login saat menekean icon kanan bawah
             @Override
             public void onClick(View v) {
                 GoToLogin();
@@ -66,12 +68,11 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
     }
 
     public boolean onMenuItemClick(MenuItem item){
+        //activity saat menu ditekan
         switch (item.getItemId()){
             case R.id.item1:
+                // memunculkan dialog masukan
                 DialogMasukan masukan = new DialogMasukan(MainActivity.this);
-//                Window window = masukan.getWindow();
-//                window.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-//                window.setGravity(Gravity.CENTER);
                 masukan.show();
 //                Toast.makeText(this,"item 1 clicked", Toast.LENGTH_SHORT).show();
                 return true;
@@ -79,6 +80,7 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
                 Toast.makeText(this,"Hubungi Kami clicked", Toast.LENGTH_SHORT).show();
                 return true;
             case R.id.item3:
+                //menuju playsotre
                 GoToPlayStore();
 //                Toast.makeText(this,"Nilai Kami clicked", Toast.LENGTH_SHORT).show();
                 return true;
@@ -98,7 +100,7 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
     }
 
     private void GoToActivityLapangan(CardView card){
-        //explicit intent buat ke activity_lapangan`
+        //explicit intent buat ke activity_lapangan
         Intent i = new Intent(MainActivity.this,MainActivityLapangan.class);
         ConstraintLayout constraint = (ConstraintLayout) card.getChildAt(0);
         TextView textView = (TextView) constraint.getChildAt(0);
@@ -113,14 +115,9 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
         startActivity(i);
     }
 
+// logging
+
     private String TAG = "Messages";
-
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState, @Nullable PersistableBundle persistentState) {
-        super.onCreate(savedInstanceState, persistentState);
-        Log.i(TAG, "onCreate");
-
-    }
 
     @Override
     protected void onStart() {

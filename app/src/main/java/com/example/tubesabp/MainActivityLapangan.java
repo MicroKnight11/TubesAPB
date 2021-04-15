@@ -18,14 +18,17 @@ public class MainActivityLapangan extends MainActivity {
         setContentView(R.layout.activity_lapangan);
         View back_btn = findViewById(R.id.back_btn);
 
+        //ambil intent sebelumnya
         Intent i = getIntent();
         String olahraga = i.getStringExtra(MainActivity.EXTRA_MESSAGE);
 
+        //mengganti text_olahraga (atas kiri) sesuai dengan text card pada intent sebelumnya
         TextView text_olahraga = findViewById(R.id.text_olahraga);
         text_olahraga.setText(olahraga);
 
         LinearLayout linear = findViewById(R.id.linear_layout);
 
+        //membuat semua card menjadi clickable
         for (int j=0; j < linear.getChildCount(); j++){
             CardView card = (CardView) linear.getChildAt(j);
             card.setOnClickListener(new View.OnClickListener() {
@@ -38,6 +41,7 @@ public class MainActivityLapangan extends MainActivity {
         }
 
         back_btn.setOnClickListener(new View.OnClickListener() {
+            //mendestroy intent saat ini
             @Override
             public void onClick(View v) {
                 finish();
