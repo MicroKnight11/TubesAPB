@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "1016023624095",
+    "firebase_url": "https://tubes-3464a-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "tubes-3464a",
+    "storage_bucket": "tubes-3464a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1016023624095:android:cf223f37ae04e3431075aa",
+        "android_client_info": {
+          "package_name": "com.example.tubesabp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1016023624095-vht6vkn6vmag69fk5foav92vep4ucpuk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD5zWess83-sIgvH2tnSzUp6q3aqXjsZes"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1016023624095-vht6vkn6vmag69fk5foav92vep4ucpuk.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

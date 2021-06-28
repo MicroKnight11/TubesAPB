@@ -1,36 +1,27 @@
 package com.example.tubesabp;
 
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.gridlayout.widget.GridLayout;
-
-import android.animation.PropertyValuesHolder;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.PersistableBundle;
 import android.util.Log;
-import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
-import android.view.Window;
-import android.widget.Button;
 import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.widget.Toast;
+import com.example.tubesabp.data.model.LoggedInUser;
 
-import com.example.tubesabp.ui.login.LoginActivity;
-
-import java.net.URI;
 
 public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuItemClickListener {
 
     public static final String EXTRA_MESSAGE = "message";
+    DatabaseHelper db;
+    LoggedInUser activeUser;
+    Boolean checkSession;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,13 +29,21 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
         setContentView(R.layout.activity_main);
         Log.i(TAG, "onCreate");
 
+        db = new DatabaseHelper(this);
+        checkSession = db.checkSession("0");
+
         GridLayout gridLayout = findViewById(R.id.grid_layout);
         View user = findViewById(R.id.userview);
         user.setOnClickListener(new View.OnClickListener(){
-            //pindah ke login saat menekean icon kanan bawah
+            //pindah ke login saat menekean icon pada kanan bawah
             @Override
             public void onClick(View v) {
-                GoToLogin();
+                if(checkSession){
+                    GoToLogin();
+                }
+                else{
+                    GoToProfile();
+                }
             }
         });
         //set setiap cardview yang ada saat di click akan buat intent ke activity_lapangan
@@ -111,17 +110,40 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
 
     private void GoToLogin(){
         //explicit intent buat ke halaman login
-        Intent i = new Intent(MainActivity.this, LoginActivity.class);
+        Intent i = new Intent(MainActivity.this, Login.class);
+        startActivity(i);
+    }
+
+    private void GoToProfile(){
+        //explicit intent buat ke halaman login
+        Intent i = new Intent(MainActivity.this, ProfileActivity.class);
         startActivity(i);
     }
 
 // logging
 
-    private String TAG = "Messages";
+    public String TAG = "Messages";
 
     @Override
     protected void onStart() {
         super.onStart();
+
+        TextView text1 = (TextView)findViewById(R.id.text_selamat);
+        TextView text2 = (TextView)findViewById(R.id.text_masuk);
+        TextView text3 = (TextView)findViewById(R.id.text_clickable);
+        // session
+        checkSession = db.checkSession("0");
+        if(checkSession == false){
+            activeUser = db.getUser();
+            text1.setText("Hi, "+ activeUser.getDisplayName());
+            text2.setText("Mau apa hari ini ?");
+            text3.setVisibility(View.GONE);
+        }
+        else{
+            text1.setText("Selamat Datang !");
+            text2.setText("Silahkan Masuk atau Daftar ");
+            text3.setVisibility(View.VISIBLE);
+        }
         Log.i(TAG, "onStart");
     }
 
