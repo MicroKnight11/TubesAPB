@@ -29,6 +29,9 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.lang.invoke.ConstantCallSite;
 
+import static androidx.core.content.ContextCompat.startActivity;
+import static com.example.tubesabp.MainActivity.EXTRA_MESSAGE;
+
 public class MainActivityLapangan extends AppCompatActivity implements PopupMenu.OnMenuItemClickListener {
 
     RecyclerView recycler;
@@ -56,7 +59,6 @@ public class MainActivityLapangan extends AppCompatActivity implements PopupMenu
 
         firebase = FirebaseDatabase.getInstance();
         reference = firebase.getReference("Data/" + olahraga);
-        Log.i("reference: ", reference.toString());
         FirebaseRecyclerAdapter<Lapangan,ViewHolder>firebaseRecyclerAdapter =
                 new FirebaseRecyclerAdapter<Lapangan, ViewHolder>(
                         Lapangan.class,
@@ -78,6 +80,21 @@ public class MainActivityLapangan extends AppCompatActivity implements PopupMenu
                         finish();
                     }
         });
+
+        recycler.addOnItemTouchListener(new RecyclerItemClickListener(this, recycler, new RecyclerItemClickListener.OnItemClickListener() {
+            @Override
+            public void onItemClick(View view, int position) {
+                Intent i = new Intent(MainActivityLapangan.this,DetailActivity.class);
+                i.putExtra("Olahraga", olahraga);
+                i.putExtra("Id", Integer.toString(position+1));
+                startActivity(i);
+            }
+
+            @Override
+            public void onLongItemClick(View view, int position) {
+            }
+        }));
+
     }
 
     public void showPopUp(View v) {

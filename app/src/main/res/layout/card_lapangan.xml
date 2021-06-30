@@ -9,6 +9,7 @@
     app:cardElevation="5dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/card_lapangan"
         android:layout_width="match_parent"
         android:layout_height="160dp">
 
