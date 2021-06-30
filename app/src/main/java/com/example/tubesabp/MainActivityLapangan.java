@@ -41,7 +41,7 @@ public class MainActivityLapangan extends AppCompatActivity implements PopupMenu
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.acitivity_lapangan2);
+        setContentView(R.layout.activity_lapangan);
         View back_btn = findViewById(R.id.back_btn);
 
         //ambil intent sebelumnya
